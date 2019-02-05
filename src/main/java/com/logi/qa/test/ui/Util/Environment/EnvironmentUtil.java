@@ -1,7 +1,7 @@
-package com.logi.qa.test.Util.Environment;
+package com.logi.qa.test.ui.Util.Environment;
 
 
-import com.logi.qa.test.Util.PropertiesContext;
+import com.logi.qa.test.ui.Util.PropertiesContext;
 
 /**
  * Class setups OS and Browser environment

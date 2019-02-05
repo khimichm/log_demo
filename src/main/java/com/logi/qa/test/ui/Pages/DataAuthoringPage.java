@@ -1,4 +1,4 @@
-package com.logi.qa.test.Pages;
+package com.logi.qa.test.ui.Pages;
 
 import com.codeborne.selenide.SelenideElement;
 

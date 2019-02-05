@@ -1,7 +1,7 @@
-package com.logi.qa.test.Pages;
+package com.logi.qa.test.ui.Pages;
 
-import com.logi.qa.test.Chunks.LogiPanel;
-import com.logi.qa.test.Dialogs.GeneralYesNoDialog;
+import com.logi.qa.test.ui.Chunks.LogiPanel;
+import com.logi.qa.test.ui.Dialogs.GeneralYesNoDialog;
 
 import static com.codeborne.selenide.Selenide.$;
 

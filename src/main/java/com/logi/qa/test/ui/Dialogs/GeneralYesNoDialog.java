@@ -1,7 +1,7 @@
-package com.logi.qa.test.Dialogs;
+package com.logi.qa.test.ui.Dialogs;
 
 import com.codeborne.selenide.SelenideElement;
-import com.logi.qa.test.Pages.AbstractPage;
+import com.logi.qa.test.ui.Pages.AbstractPage;
 
 import static com.codeborne.selenide.Selenide.$;
 

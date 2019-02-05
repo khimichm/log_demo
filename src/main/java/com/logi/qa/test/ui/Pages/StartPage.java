@@ -1,4 +1,4 @@
-package com.logi.qa.test.Pages;
+package com.logi.qa.test.ui.Pages;
 
 import com.codeborne.selenide.SelenideElement;
 
@@ -14,7 +14,7 @@ public class StartPage extends PageWithPanels {
         return getLogiPanel().getElement().exists() && getLogiContent().exists();
     }
 
-    private SelenideElement getLogiContent() {
+    public SelenideElement getLogiContent() {
         return $(LOGI_CONTENT);
     }
 

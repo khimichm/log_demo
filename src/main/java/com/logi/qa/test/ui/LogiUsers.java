@@ -1,6 +1,6 @@
-package com.logi.qa.test;
+package com.logi.qa.test.ui;
 
-import com.logi.qa.test.Util.PropertiesContext;
+import com.logi.qa.test.ui.Util.PropertiesContext;
 
 /**
  * @author mkhimich

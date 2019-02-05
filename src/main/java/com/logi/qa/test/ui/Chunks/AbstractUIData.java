@@ -1,4 +1,4 @@
-package com.logi.qa.test.Chunks;
+package com.logi.qa.test.ui.Chunks;
 
 import java.util.HashSet;
 

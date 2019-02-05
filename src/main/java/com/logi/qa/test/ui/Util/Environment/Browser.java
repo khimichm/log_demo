@@ -1,4 +1,4 @@
-package com.logi.qa.test.Util.Environment;
+package com.logi.qa.test.ui.Util.Environment;
 
 /**
  * @author mkhimich

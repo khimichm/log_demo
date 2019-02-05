@@ -1,11 +1,13 @@
-package com.logi.qa.test;
+package com.logi.qa.test.ui;
 
 
-import com.logi.qa.test.Pages.ConnectionsPage;
-import com.logi.qa.test.Pages.DataAuthoringPage;
-import com.logi.qa.test.Pages.LoginPage;
-import com.logi.qa.test.Pages.StartPage;
+import com.logi.qa.test.ui.Pages.ConnectionsPage;
+import com.logi.qa.test.ui.Pages.DataAuthoringPage;
+import com.logi.qa.test.ui.Pages.LoginPage;
+import com.logi.qa.test.ui.Pages.StartPage;
 import org.testng.annotations.Test;
+
+import static com.codeborne.selenide.Condition.*;
 
 
 /**
@@ -18,7 +20,7 @@ public class TestDefaultFlow extends AbstractTest {
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(LogiUsers.ADMIN);
-        startPage.isPageLoaded();
+        startPage.getLogiContent().shouldBe(visible);
     }
 
     @Test

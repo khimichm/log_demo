@@ -1,7 +1,7 @@
-package com.logi.qa.test.Chunks;
+package com.logi.qa.test.ui.Chunks;
 
-import com.logi.qa.test.Util.PropertiesContext;
-import org.openqa.selenium.WebDriver;
+import com.codeborne.selenide.SelenideDriver;
+import com.logi.qa.test.ui.Util.PropertiesContext;
 
 import java.util.Set;
 
@@ -11,7 +11,7 @@ import java.util.Set;
  * @author mkhimich
  */
 public interface UIData {
-    WebDriver getDriver();
+    SelenideDriver getDriver();
 
     PropertiesContext getContext();
 

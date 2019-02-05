@@ -1,9 +1,11 @@
-package com.logi.qa.test.Util;
+package com.logi.qa.test.ui.Util;
 
-import java.io.File;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
@@ -18,7 +20,6 @@ public class PropertiesContext {
     public static final String PROPERTIES_SUFFIX = ".properties";
     private static final String TEST_PROPERTIES = "test";
     private static final String UI_MAP_PROPERTIES = "uiMap";
-    public static final String USER_DIR = System.getProperty("user.dir");
 
     private Properties testMap = new Properties();
     private Properties uiMap = new Properties();
@@ -32,6 +33,12 @@ public class PropertiesContext {
 
     private PropertiesContext() {
         init();
+        setDefaultConfiguration();
+    }
+
+    private void setDefaultConfiguration() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+        Configuration.reportsFolder = getProperty("test.result.path");
     }
 
     public void clear() {
@@ -74,10 +81,6 @@ public class PropertiesContext {
 
     public String getProperty(String key) {
         return (String) generalMap.get(key);
-    }
-
-    public String getDriverPath(String key) {
-        return Paths.get(USER_DIR,getProperty(key)).toString();
     }
 
 }

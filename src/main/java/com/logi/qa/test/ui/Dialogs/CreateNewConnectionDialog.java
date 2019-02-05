@@ -1,11 +1,9 @@
-package com.logi.qa.test.Dialogs;
+package com.logi.qa.test.ui.Dialogs;
 
 import com.codeborne.selenide.SelenideElement;
-import com.logi.qa.test.Pages.AbstractPage;
+import com.logi.qa.test.ui.Pages.AbstractPage;
 
-import java.nio.charset.Charset;
 import java.util.List;
-import java.util.Random;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;

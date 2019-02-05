@@ -1,28 +1,30 @@
-package com.logi.qa.test.Util;
+package com.logi.qa.test.ui.Util;
 
+import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.WebDriverRunner;
-import com.logi.qa.test.Util.Environment.Browser;
-import com.logi.qa.test.Util.Environment.EnvironmentUtil;
-import com.codeborne.selenide.Configuration;
+import com.logi.qa.test.ui.Util.Environment.Browser;
+import com.logi.qa.test.ui.Util.Environment.EnvironmentUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
-import java.util.Hashtable;
-import java.util.Map;
+import java.nio.file.Paths;
 
 /**
  * @author mkhimich
  */
 public class WebDriverWrapper {
+
+    private static final String USER_DIR = System.getProperty("user.dir");
+    private static final PropertiesContext context = PropertiesContext.getInstance();
     /**
      * Method get the browser instance and try to create WebDriver object for test
      *
      * @return WebDriver after initialization
      */
-    public static WebDriver getWebDriver() {
+    public static SelenideDriver getWebDriver() {
         return getWebDriver(EnvironmentUtil.getInstance().getBrowser());
     }
 
@@ -33,27 +35,27 @@ public class WebDriverWrapper {
      *
      * @return driver WebDriver
      */
-    public static WebDriver getWebDriver(Browser browser) {
+    private static SelenideDriver getWebDriver(Browser browser) {
         EnvironmentUtil util = EnvironmentUtil.getInstance();
-        PropertiesContext context = PropertiesContext.getInstance();
+
         WebDriver driver = null;
         switch (browser) {
             case IE:
                 System.out.println("Setting iedriver...");
-                System.setProperty("webdriver.ie.driver", context.getDriverPath("win32.ie.driver"));
+                System.setProperty("webdriver.ie.driver", getDriverPath("win32.ie.driver"));
                 driver = new InternetExplorerDriver();
                 break;
             case FIREFOX:
                 System.out.println("Setting Geckodriver...");
                 switch (util.getOs()) {
                     case WINDOWS:
-                        System.setProperty("webdriver.gecko.driver", context.getDriverPath("win.gecko.driver"));
+                        System.setProperty("webdriver.gecko.driver", getDriverPath("win.gecko.driver"));
                         break;
                     case LINUX:
                         //linux code here
                         break;
                     case MAC:
-                        System.setProperty("webdriver.gecko.driver", context.getDriverPath("mac.gecko.driver"));
+                        System.setProperty("webdriver.gecko.driver", getDriverPath("mac.gecko.driver"));
                         break;
                 }
                 driver = new FirefoxDriver();
@@ -63,13 +65,13 @@ public class WebDriverWrapper {
                 System.out.println("Setting chromedriver...");
                 switch (util.getOs()) {
                     case WINDOWS:
-                        System.setProperty("webdriver.chrome.driver", context.getDriverPath("win.chrome.driver"));
+                        System.setProperty("webdriver.chrome.driver", getDriverPath("win.chrome.driver"));
                         break;
                     case LINUX:
                         //linux code here
                         break;
                     case MAC:
-                        System.setProperty("webdriver.chrome.driver", context.getDriverPath("mac.chrome.driver"));
+                        System.setProperty("webdriver.chrome.driver", getDriverPath("mac.chrome.driver"));
                         break;
                 }
                 driver = new ChromeDriver();
@@ -77,16 +79,19 @@ public class WebDriverWrapper {
                 break;
             case EDGE:
                 System.out.println("Setting edgedriver...");
-                System.setProperty("webdriver.edge.driver", context.getDriverPath("win.edge.driver"));
+                System.setProperty("webdriver.edge.driver", getDriverPath("win.edge.driver"));
                 driver = new EdgeDriver();
                 System.out.println("Set Driver to EdgeDriver");
                 //For opening clean browser every time
                 driver.get("about:InPrivate");
                 break;
         }
-        Configuration.browser = browser.toString().toLowerCase();
         driver.manage().window().maximize();
         WebDriverRunner.setWebDriver(driver);
-        return driver;
+        return WebDriverRunner.getSelenideDriver();
+    }
+
+    public static String getDriverPath(String key) {
+        return Paths.get(USER_DIR, context.getProperty(key)).toString();
     }
 }

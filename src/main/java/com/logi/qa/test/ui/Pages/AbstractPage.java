@@ -1,15 +1,15 @@
-package com.logi.qa.test.Pages;
+package com.logi.qa.test.ui.Pages;
 
-import com.logi.qa.test.Chunks.AbstractUIData;
-import com.logi.qa.test.Chunks.UIData;
-import com.logi.qa.test.Util.PropertiesContext;
-import org.openqa.selenium.WebDriver;
+import com.codeborne.selenide.SelenideDriver;
+import com.logi.qa.test.ui.Chunks.AbstractUIData;
+import com.logi.qa.test.ui.Chunks.UIData;
+import com.logi.qa.test.ui.Util.PropertiesContext;
 
 /**
  * @author mkhimich
  */
 public abstract class AbstractPage extends AbstractUIData {
-    protected WebDriver driver;
+    protected SelenideDriver driver;
     protected PropertiesContext context = PropertiesContext.getInstance();
 
     public UIData getParent() {
@@ -20,7 +20,7 @@ public abstract class AbstractPage extends AbstractUIData {
         return context;
     }
 
-    public WebDriver getDriver() {
+    public SelenideDriver getDriver() {
         return driver;
     }
 
@@ -29,7 +29,7 @@ public abstract class AbstractPage extends AbstractUIData {
     }
 
     public void reload() {
-        driver.navigate().refresh();
+        driver.refresh();
     }
 
 }

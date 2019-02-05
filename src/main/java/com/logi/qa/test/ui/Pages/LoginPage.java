@@ -1,9 +1,7 @@
-package com.logi.qa.test.Pages;
+package com.logi.qa.test.ui.Pages;
 
 import com.codeborne.selenide.SelenideElement;
-import com.logi.qa.test.LogiUsers;
-import com.logi.qa.test.Util.PropertiesContext;
-import org.openqa.selenium.WebDriver;
+import com.logi.qa.test.ui.LogiUsers;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
