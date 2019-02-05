@@ -1,17 +1,18 @@
 package com.logi.qa.test;
 
 
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.logi.qa.test.Util.PropertiesContext;
 import com.logi.qa.test.Util.WebDriverWrapper;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.rules.TestName;
-import org.junit.rules.Timeout;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
-import java.util.concurrent.TimeUnit;
+import java.lang.reflect.Method;
+
 
 /**
  * @author mkhimich
@@ -20,19 +21,15 @@ public abstract class AbstractTest {
     protected PropertiesContext context;
     protected WebDriver driver = null;
 
-    @Rule
-    public TestName testName = new TestName();
-    //Any test that might hang will be forced to end within 120 seconds
-    @Rule
-    public Timeout globalTimeout = new Timeout(120, TimeUnit.SECONDS);
 
     public AbstractTest() {
         context = PropertiesContext.getInstance();
     }
 
-    @Before
-    public void tearUp() {
-        System.out.println("========================== START TEST " + testName.getMethodName() + " " +
+    @BeforeTest
+    public void tearUp(ITestContext testContext) {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+        System.out.println("========================== START TEST " + testContext.getName() + " " +
             "==============================");
         System.out.println("Server URL = " + context.getProperty("app.url"));
         driver = WebDriverWrapper.getWebDriver();
@@ -40,9 +37,9 @@ public abstract class AbstractTest {
 //        driver = WebDriverWrapper.getWebDriver();
     }
 
-    @After
-    public void tearDown() {
-        System.out.println("========================== END TEST " + testName.getMethodName() + " " +
+    @AfterTest
+    public void tearDown(ITestContext testContext) {
+        System.out.println("========================== END TEST " + testContext.getName() + " " +
             "==============================");
         driver.quit();
     }

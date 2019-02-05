@@ -5,9 +5,7 @@ import com.logi.qa.test.Pages.ConnectionsPage;
 import com.logi.qa.test.Pages.DataAuthoringPage;
 import com.logi.qa.test.Pages.LoginPage;
 import com.logi.qa.test.Pages.StartPage;
-import org.junit.Test;
-
-import static org.junit.Assert.assertTrue;
+import org.testng.annotations.Test;
 
 
 /**
@@ -20,7 +18,7 @@ public class TestDefaultFlow extends AbstractTest {
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(LogiUsers.ADMIN);
-        assertTrue("Start page was not displayed", startPage.isPageLoaded());
+        startPage.isPageLoaded();
     }
 
     @Test
