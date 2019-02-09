@@ -2,6 +2,9 @@ package com.logi.qa.test.ui;
 
 import com.logi.qa.test.ui.Util.PropertiesContext;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author mkhimich
  */
@@ -34,5 +37,12 @@ public enum LogiUsers {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Map<String, String> getUserMap() {
+        Map<String, String> user = new HashMap<>();
+        user.put("username", userName);
+        user.put("password", password);
+        return user;
     }
 }
