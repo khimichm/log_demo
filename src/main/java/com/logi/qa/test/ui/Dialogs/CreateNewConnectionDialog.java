@@ -3,6 +3,7 @@ package com.logi.qa.test.ui.Dialogs;
 import com.codeborne.selenide.SelenideElement;
 import com.logi.qa.test.ui.Pages.AbstractPage;
 
+import javax.swing.*;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -17,6 +18,10 @@ public class CreateNewConnectionDialog extends AbstractPage {
     private static final String CONNECTIONDIALOG_SAVE = ".modal-dialog .btn.btn-primary:nth-child(3)";
     private static final String CLOSE_DIALOG_BUTTON = ".modal-content .close";
     private static final String CONNECTIONDIALOG_SUCCESS = ".alert-success";
+    private static final String CONNECTIONDIALOG_GET_LIST = ".btn-sm";
+    private static final String CONNECTIONDIALOG_DATABASE_NAME_AFTER_LIST = ".database-select input";
+    private static final String CONNECTIONDIALOG_TEST_SOURCE = ".modal-footer .btn.btn-primary";
+
     private final String dataProvider = "Microsoft SQL Server";
     private final String serverName = context.getProperty("jdbc.server.name");
     private final String userName = context.getProperty("jdbc.user.name");
@@ -25,12 +30,20 @@ public class CreateNewConnectionDialog extends AbstractPage {
     private final String portNumber = context.getProperty("jdbc.port.number");
 
     public void createNewJDBCConnection(String sourceName) {
+        populateNewConnection(sourceName);
+        saveConnection();
+    }
+
+    public void populateNewConnection(String sourceName) {
         getAddSourceProperties().get(0).$("select").selectOption(dataProvider);
         getAddSourceProperties().get(1).$("input").setValue(sourceName);
         getAddSourceProperties().get(2).$("input").setValue(serverName);
         getAddSourceProperties().get(3).$("input").setValue(userName);
         getAddSourceProperties().get(4).$("input").setValue(password);
         getAddSourceProperties().get(5).$("input").setValue(dbName);
+    }
+
+    public void saveConnection() {
         getSaveButton().click();
         getSuccessElement().shouldBe(visible);
         getCloseDialogButton().click();
@@ -52,4 +65,25 @@ public class CreateNewConnectionDialog extends AbstractPage {
         return $$(CONNECTIONDIALOG_ADDSOURCE_LIST);
     }
 
+    public void populateDatabaseNameWithGetList() {
+        getListButton().click();
+        getDatabaseNameInput().setValue(dbName);
+    }
+
+    private SelenideElement getDatabaseNameInput() {
+        return $(CONNECTIONDIALOG_DATABASE_NAME_AFTER_LIST);
+    }
+
+    private SelenideElement getListButton() {
+        return $(CONNECTIONDIALOG_GET_LIST);
+    }
+
+    public void testConnection() {
+        getTestConnectionButton().click();
+        getSuccessElement().shouldBe(visible);
+    }
+
+    private SelenideElement getTestConnectionButton() {
+        return $(CONNECTIONDIALOG_TEST_SOURCE);
+    }
 }
