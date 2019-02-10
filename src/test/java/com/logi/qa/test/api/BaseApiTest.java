@@ -108,12 +108,12 @@ public class BaseApiTest extends AbstractApiTest{
 //                body(containsString("MySQL"));
 //    }
 
-//    @Test( groups = {"api", "baseflow", "deleteConnection"},priority=4)
-//    @Severity(SeverityLevel.CRITICAL)
-//    public void testDeleteConnection(){
-//        specification.basePath(connection.getDBURI()).
-//                body(connection.getReferenceJson(connectionName)).delete().
-//                then().statusCode(204);
-//    }
+    @Test( groups = {"api", "baseflow", "deleteConnection"},priority=4)
+    @Severity(SeverityLevel.CRITICAL)
+    public void testDeleteConnection(){
+        specification.basePath(connection.getDBURI()).
+                body(connection.getReferenceJson(connectionName)).delete().
+                then().statusCode(204);
+    }
 
 }
