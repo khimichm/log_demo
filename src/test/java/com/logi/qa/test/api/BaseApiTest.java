@@ -18,8 +18,11 @@ import static org.hamcrest.CoreMatchers.containsString;
 
 public class BaseApiTest extends AbstractApiTest{
     private String tableId;
+    SystemConnection connection = new SystemConnection();
+    private String connectionName = "QaMySQL";
+    /*getRandomString();*/
 
-    @Test(groups = {"api", "baseflow"})
+    @Test(groups = {"api", "baseflow"},priority=1)
     public void testAuthenticate() {
         given().contentType("application/json").
                 queryParam("action", "authenticate").
@@ -31,11 +34,9 @@ public class BaseApiTest extends AbstractApiTest{
 
     }
 
-    @Test( groups = {"api", "baseflow", "createConnection"})
+    @Test( groups = {"api", "baseflow", "createConnection"},priority=1)
     @Severity(SeverityLevel.CRITICAL)
     public void testCreateConnection(){
-        String connectionName = getRandomString();
-        SystemConnection connection = new SystemConnection();
         specification.basePath(connection.getURI()).
                 body(connection.getConnectionBody(connectionName)).post().
                 then().statusCode(201).
@@ -43,39 +44,35 @@ public class BaseApiTest extends AbstractApiTest{
                 body(containsString("*******"));
     }
 
-    @Test( dependsOnMethods = {"testCreateConnection"}, groups = {"api", "baseflow", "connectionsGet"})
+    @Test(groups = {"api", "baseflow", "connectionsGet"},priority=2)
     @Severity(SeverityLevel.NORMAL)
     public void testGetConnection(){
-        SystemConnection connection = new SystemConnection();
         specification.basePath(connection.getDBURI()).get().
                 then().statusCode(200).
                 body(containsString("QaMySQL"));
     }
 
-    @Test(dependsOnMethods = {"testCreateConnection"}, groups = {"api", "baseflow", "connectionsGet"})
+    @Test(groups = {"api", "baseflow", "connectionsGet"},priority=2)
     @Severity(SeverityLevel.NORMAL)
     public void testGetSchemas(){
-        SystemConnection connection = new SystemConnection();
         specification.basePath(connection.getDBURI()).
                 queryParam("action","getSchemas").get().
                 then().statusCode(200).
                 body(containsString("eyJjb25uZWN0aW9uSWQiOiJRYU15U1FMIn0="));
     }
 
-    @Test(dependsOnMethods = {"testCreateConnection"}, groups = {"api", "baseflow", "connectionsGet"})
+    @Test(groups = {"api", "baseflow", "connectionsGet"},priority=3)
     @Severity(SeverityLevel.NORMAL)
     public void testGetDatabases(){
-        SystemConnection connection = new SystemConnection();
         specification.basePath(connection.getDBURI()).
                 queryParam("action","getDatabases").get().
                 then().statusCode(200).
                 body(containsString("KMysqlPredictGo"));
     }
 
-    @Test( groups = {"api", "baseflow", "connectionsGet"})
+    @Test(groups = {"api", "baseflow", "connectionsGet"},priority=2)
     @Severity(SeverityLevel.NORMAL)
     public void testGetTables(){
-        SystemConnection connection = new SystemConnection();
         specification.basePath(connection.getDBURI()).
                 queryParam("action","getTables").get().
                 then().statusCode(200).
@@ -93,5 +90,30 @@ public class BaseApiTest extends AbstractApiTest{
 //                body(containsString("1TestID"));
 //    }
 
+//    @Test( groups = {"api", "baseflow", "createReference"})
+//    @Severity(SeverityLevel.CRITICAL)
+//    public void testPostReference(){
+//        specification.basePath(connection.getReferenceURI()).
+//                body(connection.getReferenceJson(connectionName)).post().
+//                then().statusCode(201).
+//                body(containsString("MySQL"));
+//    }
+
+//    @Test( groups = {"api", "baseflow", "createReference"})
+//    @Severity(SeverityLevel.NORMAL)
+//    public void testGetReference(){
+//        specification.basePath(connection.getReferenceURI()).
+//                body(connection.getReferenceJson(connectionName)).get().
+//                then().statusCode(200).
+//                body(containsString("MySQL"));
+//    }
+
+//    @Test( groups = {"api", "baseflow", "deleteConnection"},priority=4)
+//    @Severity(SeverityLevel.CRITICAL)
+//    public void testDeleteConnection(){
+//        specification.basePath(connection.getDBURI()).
+//                body(connection.getReferenceJson(connectionName)).delete().
+//                then().statusCode(204);
+//    }
 
 }

@@ -21,17 +21,18 @@ import static io.restassured.RestAssured.given;
 public abstract class AbstractApiTest {
     public RequestSpecification specification;
     public PropertiesContext context = PropertiesContext.getInstance();
+    public String authToken;
 
     @BeforeClass
-    public void tearUp(){
+    public void getToken(){
         specification = given().filter(new AllureRestAssured()).log().all().contentType("application/json").baseUri(context.getProperty("api.url"));
-        String authToken = getAuthToken();
+        authToken = getAuthToken();
+    }
+    @BeforeMethod
+    public void setSpecification(){
+        specification = given().filter(new AllureRestAssured()).log().all().contentType("application/json").baseUri(context.getProperty("api.url"));
         specification = specification.header("X-Logi-Auth", authToken);
         specification = specification.cookie("LogiAuth", authToken);
-    }
-
-    public RequestSpecification getSpecification(){
-        return specification;
     }
 
     public String getRandomString() {
