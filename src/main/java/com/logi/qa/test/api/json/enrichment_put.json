@@ -1,0 +1,46 @@
+{
+  "name": "QaMySQL_enrichment_dvd_SQL_Employees",
+  "starts": [
+    {
+      "name": "QaMySQL_enrichment_dvd",
+      "type": "dataview",
+      "dataview": "QaMySQL_reference_dvd",
+      "isCached": false
+    }
+  ],
+  "operations": [
+    {
+      "type": "selectColumns",
+      "name": "columnRename",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "alias": "EmployeeID"
+        },
+        {
+          "name": "LastName",
+          "alias": "LastName"
+        },
+        {
+          "name": "FirstName",
+          "alias": "FirstName"
+        },
+        {
+          "name": "BirthDate",
+          "alias": "BirthDate"
+        }
+      ]
+    }
+  ],
+  "ends": [
+    {
+      "type": "return",
+      "format": {
+        "type": "JSON"
+      }
+    }
+  ],
+  "cachingSelected": false,
+  "columnNameChanges": null,
+  "id": "QaMySQL_enrichment_dvd"
+}
