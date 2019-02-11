@@ -10,6 +10,7 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ public class BaseApiTest extends AbstractApiTest{
     private String tableId;
     SystemConnection connection = new SystemConnection();
     private String connectionName = "QaMySQL";
+    private String referenceName = "QaMySQL_reference_dvd";
+    private String enrichmentName = "QaMySQL_enrichment_dvd";
     /*getRandomString();*/
 
     @Test(groups = {"api", "baseflow"},priority=1)
@@ -79,41 +82,58 @@ public class BaseApiTest extends AbstractApiTest{
                 body(containsString("1funny-table"));
     }
 
-//    @Test( groups = {"api", "baseflow", "connectionsGet"})
-//    @Severity(SeverityLevel.NORMAL)
-//    public void testGetColumnsAndTableId(){
-//        SystemConnection connection = new SystemConnection();
-//        specification.basePath(connection.getDBURI()).
-//                queryParam("action","getColumns").
-//                queryParam("tableId", "1funny-table").get().
-//                then().statusCode(200).
-//                body(containsString("1TestID"));
-//    }
-
-//    @Test( groups = {"api", "baseflow", "createReference"})
-//    @Severity(SeverityLevel.CRITICAL)
-//    public void testPostReference(){
-//        specification.basePath(connection.getReferenceURI()).
-//                body(connection.getReferenceJson(connectionName)).post().
-//                then().statusCode(201).
-//                body(containsString("MySQL"));
-//    }
-
-//    @Test( groups = {"api", "baseflow", "createReference"})
-//    @Severity(SeverityLevel.NORMAL)
-//    public void testGetReference(){
-//        specification.basePath(connection.getReferenceURI()).
-//                body(connection.getReferenceJson(connectionName)).get().
-//                then().statusCode(200).
-//                body(containsString("MySQL"));
-//    }
-
-    @Test( groups = {"api", "baseflow", "deleteConnection"},priority=4)
-    @Severity(SeverityLevel.CRITICAL)
-    public void testDeleteConnection(){
+    @Test( groups = {"api", "baseflow", "connectionsGet"},priority=3)
+    @Severity(SeverityLevel.NORMAL)
+    public void testGetColumnsAndTableId(){
+        SystemConnection connection = new SystemConnection();
         specification.basePath(connection.getDBURI()).
-                body(connection.getReferenceJson(connectionName)).delete().
-                then().statusCode(204);
+                queryParam("action","getColumns").
+                queryParam("tableId", "1funny-table").get().
+                then().statusCode(200).
+                body(containsString("1TestID"));
     }
+
+    @Test( groups = {"api", "baseflow", "createReference"},priority=3)
+    @Severity(SeverityLevel.CRITICAL)
+    public void testPostReference() throws IOException{
+        specification.basePath(connection.getReferenceURI()).
+                body(connection.getReferenceJson("reference.json")).post().
+                then().statusCode(201).
+                body(containsString("MySQL"));
+    }
+
+    @Test( groups = {"api", "baseflow", "createReference"},priority=3)
+    @Severity(SeverityLevel.NORMAL)
+    public void testGetReference(){
+        specification.basePath(connection.getCustomReferenceURI(referenceName)).
+                queryParam("action", "query").get().
+                then().statusCode(200).
+                body(containsString("OrderID"));
+    }
+
+    @Test( groups = {"api", "baseflow", "createReference"},priority=3)
+    @Severity(SeverityLevel.NORMAL)
+    public void testPostEnrichment() throws IOException {
+        specification.basePath(connection.getEnrichmentURI()).
+            body(connection.getReferenceJson("enrichment.json")).post().
+            then().statusCode(201);
+    }
+
+    @Test( groups = {"api", "baseflow", "createReference"},priority=3)
+    @Severity(SeverityLevel.NORMAL)
+    public void testGetEnrichment(){
+        specification.basePath(connection.getCustomEnrichmentURI(enrichmentName)).
+            queryParam("action", "query").get().
+            then().statusCode(200).
+            body(containsString("OrderID"));
+    }
+
+//    @Test( groups = {"api", "baseflow", "deleteConnection"},priority=4)
+//    @Severity(SeverityLevel.CRITICAL)
+//    public void testDeleteConnection(){
+//        specification.basePath(connection.getDBURI()).
+//                body(connection.getReferenceJson(connectionName)).delete().
+//                then().statusCode(204);
+//    }
 
 }

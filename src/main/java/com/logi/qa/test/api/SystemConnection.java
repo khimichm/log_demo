@@ -1,7 +1,11 @@
 package com.logi.qa.test.api;
 
 import com.logi.qa.test.ui.Util.PropertiesContext;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,28 +28,24 @@ public class SystemConnection extends BaseApi{
         return context.getProperty("api.system.references");
     }
 
-    public String getReferenceJson(String name) {
-        return "{\n" +
-                "    \"name\": \"QaMySQL_reference_dvd\",\n" +
-                "    \"id\": \"QaMySQL_reference_dvd\",\n" +
-                "    \"starts\": [\n" +
-                "        {\n" +
-                "            \"name\": \"Orders\",\n" +
-                "            \"type\": \"sql\",\n" +
-                "            \"connection\": \""+ name + "\",\n" +
-                "            \"dbo\": \"qanorthwind_cs\",\n" +
-                "            \"query\": \"orders\"\n" +
-                "        }\n" +
-                "    ],\n" +
-                "    \"operations\": [],\n" +
-                "    \"ends\": [\n" +
-                "        {\n" +
-                "            \"type\": \"return\",\n" +
-                "            \"format\": {\n" +
-                "                \"type\": \"JSON\"\n" +
-                "            }\n" +
-                "        }\n" +
-                "    ]\n" +
-                "}";
+    public String getCustomReferenceURI(String name){
+        return getReferenceURI() + "/" + name;
+    }
+
+    public String getEnrichmentURI() {
+        return context.getProperty("api.system.enrichment");
+    }
+
+    public String getCustomEnrichmentURI(String name){
+        return getEnrichmentURI() + "/" + name;
+    }
+
+    public String getReferenceJson(String name) throws IOException{
+        return getJsonFromFile(name);
+    }
+
+    private String getJsonFromFile(String name) throws IOException {
+        File json = new File(Paths.get(context.USER_DIR, context.getProperty("json.location.path"), name).toString());
+        return FileUtils.readFileToString(json, "UTF-8");
     }
 }

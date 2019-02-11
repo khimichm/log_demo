@@ -17,7 +17,6 @@ import java.nio.file.Paths;
  */
 public class WebDriverWrapper {
 
-    private static final String USER_DIR = System.getProperty("user.dir");
     private static final PropertiesContext context = PropertiesContext.getInstance();
     /**
      * Method get the browser instance and try to create WebDriver object for test
@@ -92,6 +91,6 @@ public class WebDriverWrapper {
     }
 
     public static String getDriverPath(String key) {
-        return Paths.get(USER_DIR, context.getProperty(key)).toString();
+        return Paths.get(context.USER_DIR, context.getProperty(key)).toString();
     }
 }

@@ -16,6 +16,7 @@ import java.util.Properties;
  * @author mkhimch
  */
 public class PropertiesContext {
+    public static final String USER_DIR = System.getProperty("user.dir");
     public static final String USER_HOME_SYSTEM_PROPERTY = "user.home";
     public static final String PROPERTIES_SUFFIX = ".properties";
     private static final String TEST_PROPERTIES = "test";

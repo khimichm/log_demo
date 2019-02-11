@@ -1,0 +1,22 @@
+{
+  "name": "QaMySQL_reference_dvd",
+  "id": "QaMySQL_reference_dvd",
+  "starts": [
+    {
+      "name": "Orders",
+      "type": "sql",
+      "connection": "QaMySQL",
+      "dbo": "qanorthwind_cs",
+      "table": "employees"
+    }
+  ],
+  "operations": [],
+  "ends": [
+    {
+      "type": "return",
+      "format": {
+        "type": "JSON"
+      }
+    }
+  ]
+}
