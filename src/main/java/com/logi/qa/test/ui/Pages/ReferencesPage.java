@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class ReferencesPage extends PageWithPanels {
-    private static final String CREATE_NEW_REFERENCE = "a[href='/composer/data-manager/references/new-reference]'";
+    private static final String CREATE_NEW_REFERENCE = "a[href='/composer/data-manager/references/new-reference'";
     private static final String CREATED_REFERENCES_LIST = ".table-data-gallery .content-row";
 
     public void createNewReference(String dbName, String tableName) {
