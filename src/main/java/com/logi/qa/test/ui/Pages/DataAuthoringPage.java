@@ -11,7 +11,7 @@ public class DataAuthoringPage extends PageWithPanels {
 
     public static final String DATAAUTHORING_CREATE_NEW_CONNECTION = ".data-option a[href='/composer/data-manager/connections'";
     public static final String DATAAUTHORING_CREATE_NEW_REFERENCE = ".data-option a[href='/composer/data-manager/references'";
-
+    public static final String DATAAUTHORING_VIEW_ALL_ENRICHMENTS = ".data-option a[href='/composer/data-manager/enrichments'";
 
     public ConnectionsPage createNewConnection() {
         getCreateNewConnection().click();
@@ -27,7 +27,14 @@ public class DataAuthoringPage extends PageWithPanels {
         return new ReferencesPage();
     }
 
+
+    public EnrichmentsPage viewAllEnrichments(){
+        getViewAllEnrichments().click();
+        return new EnrichmentsPage();
+    }
     private SelenideElement getReferencesLink() {
         return $(DATAAUTHORING_CREATE_NEW_REFERENCE);
     }
+    private SelenideElement getViewAllEnrichments() {return $(DATAAUTHORING_VIEW_ALL_ENRICHMENTS);}
+
 }

@@ -20,6 +20,11 @@ public class PageWithPanels extends GeneralYesNoDialog {
         return new DataAuthoringPage();
     }
 
+    public PlatformSettingsPage goToPlatformSettings() {
+        getLogiPanel().getPlatformSettings().click();
+        return new PlatformSettingsPage();
+    }
+
     public GeneralYesNoDialog getYesNoDialog() {
         return new GeneralYesNoDialog();
     }
