@@ -37,6 +37,7 @@ public class TestDefaultFlow extends AbstractTest {
     @Test(groups = {"ui","flow"})
     public void testFullFlow() {
         String sourceName = "test" + getRandomString();
+        String tableName = "Orders";
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(LogiUsers.ADMIN);
@@ -49,6 +50,7 @@ public class TestDefaultFlow extends AbstractTest {
         dialog.saveConnection();
         connectionsPage.goToDataAuthoring();
         ReferencesPage referencesPage = dataAuthoringPage.goToReferences();
-        referencesPage.createNewReference(sourceName);
+        referencesPage.createNewReference(sourceName, tableName);
+        referencesPage.getCreatedReference(tableName).shouldBe(visible);
     }
 }

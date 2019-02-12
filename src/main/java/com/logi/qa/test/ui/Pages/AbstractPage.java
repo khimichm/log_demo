@@ -1,6 +1,7 @@
 package com.logi.qa.test.ui.Pages;
 
 import com.codeborne.selenide.SelenideDriver;
+import com.codeborne.selenide.SelenideElement;
 import com.logi.qa.test.ui.Chunks.AbstractUIData;
 import com.logi.qa.test.ui.Chunks.UIData;
 import com.logi.qa.test.ui.Util.PropertiesContext;

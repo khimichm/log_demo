@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 /**
  * @author mkhimich
  */
-public class PageWithPanels extends AbstractPage {
+public class PageWithPanels extends GeneralYesNoDialog {
 
 
     public LogiPanel getLogiPanel() {
