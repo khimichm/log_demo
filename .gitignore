@@ -4,3 +4,4 @@
 .allure/
 /target
 target/
+*.iml

@@ -21,6 +21,9 @@ public class CreateNewConnectionDialog extends AbstractPage {
     private static final String CONNECTIONDIALOG_GET_LIST = ".btn-sm";
     private static final String CONNECTIONDIALOG_DATABASE_NAME_AFTER_LIST = ".database-select input";
     private static final String CONNECTIONDIALOG_TEST_SOURCE = ".modal-footer .btn.btn-primary";
+    private static final String EXPAND_ADVANCED_OPTIONS = ".logi-icon-expand-o";
+    private static final String COLLAPSE_ADVANCED_OPTIONS = ".logi-icon-expand-o.expanded";
+
 
     private final String dataProvider = "Microsoft SQL Server";
     private final String serverName = context.getProperty("jdbc.server.name");
@@ -86,4 +89,9 @@ public class CreateNewConnectionDialog extends AbstractPage {
     private SelenideElement getTestConnectionButton() {
         return $(CONNECTIONDIALOG_TEST_SOURCE);
     }
+
+    public SelenideElement expandAdvancedOptions(){return $(EXPAND_ADVANCED_OPTIONS);}
+
+    public SelenideElement collapceAdvancedOptions(){return $(COLLAPSE_ADVANCED_OPTIONS);}
+
 }

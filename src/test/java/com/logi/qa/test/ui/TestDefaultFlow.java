@@ -2,6 +2,7 @@ package com.logi.qa.test.ui;
 
 
 import com.logi.qa.test.ui.Dialogs.CreateNewConnectionDialog;
+import com.logi.qa.test.ui.Dialogs.CreateNewUserDialog;
 import com.logi.qa.test.ui.Pages.*;
 import org.testng.annotations.Test;
 
@@ -52,5 +53,35 @@ public class TestDefaultFlow extends AbstractTest {
         ReferencesPage referencesPage = dataAuthoringPage.goToReferences();
         referencesPage.createNewReference(sourceName, tableName);
         referencesPage.getCreatedReference(tableName).shouldBe(visible);
+    }
+
+    @Test(groups = {"ui","platformSettings"})
+    public void platformSettings(){
+        LoginPage loginPage = new LoginPage();
+        loginPage.goToLoginPage();
+        StartPage startPage = loginPage.login(LogiUsers.ADMIN);
+        PlatformSettingsPage platformSettingsPage = startPage.goToPlatformSettings();
+        platformSettingsPage.selectAuthoringUsers();
+        platformSettingsPage.getCreateNewUserButton();
+    }
+
+    @Test(groups = {"ui","platform settings"})
+    public void createNewUserTest(){
+        LoginPage loginPage = new LoginPage();
+        loginPage.goToLoginPage();
+        StartPage startPage = loginPage.login(LogiUsers.ADMIN);
+        PlatformSettingsPage platformSettingsPage = startPage.goToPlatformSettings();
+        CreateNewUserDialog dialog = platformSettingsPage.getCreateNewUserButton();
+        dialog.createNewUser();
+    }
+
+    @Test(groups = {"ui","Enrichments"})
+    public void createNewEnrichment(){
+        LoginPage loginPage = new LoginPage();
+        loginPage.goToLoginPage();
+        StartPage startPage = loginPage.login(LogiUsers.ADMIN);
+        DataAuthoringPage dataAuthoringPage = startPage.goToDataAuthoring();
+        EnrichmentsPage enrichmentsPage = dataAuthoringPage.viewAllEnrichments();
+        enrichmentsPage.createNewEnrichment("qasql2k8", "Orders", "mssql orders enrichment");
     }
 }

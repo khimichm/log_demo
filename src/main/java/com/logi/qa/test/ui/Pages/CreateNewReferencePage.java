@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -39,7 +40,7 @@ public class CreateNewReferencePage extends PageWithPanels {
                 element.$(".check-wrap").shouldBe(Condition.visible);
                 element.$(".preview-data-btn").click();
                 //Wait for table to load for 30 seconds.
-                getPreviewTable().waitUntil(Condition.visible, 30000);
+                getPreviewTable().waitUntil(appear, 30000);
                 break;
             }
             throw new RuntimeException("There were no table with name " + tableName + " in list of tables.");
