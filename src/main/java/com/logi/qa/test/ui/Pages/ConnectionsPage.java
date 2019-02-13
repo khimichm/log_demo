@@ -44,12 +44,7 @@ public class ConnectionsPage extends PageWithPanels {
         return $(CONNECTIONSPAGE_DELETE_SELECTED);
     }
 
-    private SelenideElement getConnectionRow(String sourceName) throws ElementNotFound {
-        for (SelenideElement element : $$(CONNECTIONSPAGE_SELECT_CONNECTOR)) {
-            if (element.getText().contains(sourceName)) {
-                return element;
-            }
-        }
-        throw new RuntimeException("Unable to find connector with name " + sourceName);
+    private SelenideElement getConnectionRow(String sourceName) {
+        return $(".content-row:has(.row-title:contains(" + sourceName + "))");
     }
 }

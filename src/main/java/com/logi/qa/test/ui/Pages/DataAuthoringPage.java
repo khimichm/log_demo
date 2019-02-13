@@ -13,7 +13,7 @@ public class DataAuthoringPage extends PageWithPanels {
     public static final String DATAAUTHORING_CREATE_NEW_REFERENCE = ".data-option a[href='/composer/data-manager/references'";
     public static final String DATAAUTHORING_VIEW_ALL_ENRICHMENTS = ".data-option a[href='/composer/data-manager/enrichments'";
 
-    public ConnectionsPage createNewConnection() {
+    public ConnectionsPage goToCreateNewConnection() {
         getCreateNewConnection().click();
         return new ConnectionsPage();
     }

@@ -10,8 +10,8 @@ import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ReferencesPage extends PageWithPanels {
-    private static final String CREATE_NEW_REFERENCE = "a[href='/composer/data-manager/references/new-reference'";
-    private static final String CREATED_REFERENCES_LIST = ".table-data-gallery .content-row";
+    private static final String CREATE_NEW_REFERENCE = "a[href='/composer/data-manager/references/new-reference']";
+    private static final String DELETE_SELECTED = ".delete-button";
 
     public void createNewReference(String dbName, String tableName) {
         getCreateNewButton().click();
@@ -33,7 +33,13 @@ public class ReferencesPage extends PageWithPanels {
         return $(".content-row:has(span:contains(" + tableName + "))");
     }
 
-    private List<SelenideElement> getReferenceList() {
-        return $$(CREATED_REFERENCES_LIST);
+    public void deleteReference(String tableName) {
+        getCreatedReference(tableName).click();
+        getDeleteSelectedButton().click();
+        getYesNoDialog().confirm();
+    }
+
+    private SelenideElement getDeleteSelectedButton() {
+        return $(DELETE_SELECTED);
     }
 }

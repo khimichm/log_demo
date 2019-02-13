@@ -12,6 +12,7 @@ public class EnrichmentsPage extends PageWithPanels{
 
     private static final String CREATE_NEW_ENRICHMENT_DVD = "a[href='/composer/data-manager/enrichments/new-enrichment'";
     private static final String  CREATED_ENRICHMENTS_LIST = ".table-data-gallery .content-row";
+    private static final String DELETE_SELECTED = ".delete-button";
 
 //
 //    public CreateNewEnrichmentPage openCreateNewEnrichmentPage() {
@@ -32,16 +33,22 @@ public class EnrichmentsPage extends PageWithPanels{
     }
 
     public SelenideElement getCreatedEnrichment(String enrichmentName){
-        for(SelenideElement element : getEnrichmentsList()){
-            if(element.getText().contains(enrichmentName)){
-                return element;
-            }
-        }
-        throw new RuntimeException("Enrichment with name " + enrichmentName + " cannot be found in list of enrichment ");
+       return $(".content-row:has(.row-title:contains("+ enrichmentName + "))");
     }
 
     private List<SelenideElement> getEnrichmentsList(){return $$(CREATED_ENRICHMENTS_LIST);}
 
     private SelenideElement getCreateNewEnrichment(){return $(CREATE_NEW_ENRICHMENT_DVD);}
+
+    public void deleteEnrichment(String enrichmentName) {
+            getCreatedEnrichment(enrichmentName).click();
+            getDeleteSelectedButton().click();
+            getYesNoDialog().confirm();
+    }
+
+    private SelenideElement getDeleteSelectedButton() {
+        return $(DELETE_SELECTED);
+    }
+
 
 }
