@@ -1,12 +1,16 @@
 package com.logi.qa.test.ui.Util;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelectorMode;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
+import static com.codeborne.selenide.SelectorMode.Sizzle;
 
 /**
  * Singleton.
@@ -40,6 +44,7 @@ public class PropertiesContext {
     private void setDefaultConfiguration() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
         Configuration.reportsFolder = getProperty("test.result.path");
+        Configuration.selectorMode = Sizzle;
     }
 
     public void clear() {

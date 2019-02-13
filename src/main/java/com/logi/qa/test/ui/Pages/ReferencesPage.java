@@ -7,6 +7,7 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class ReferencesPage extends PageWithPanels {
     private static final String CREATE_NEW_REFERENCE = "a[href='/composer/data-manager/references/new-reference'";
@@ -29,12 +30,7 @@ public class ReferencesPage extends PageWithPanels {
     }
 
     public SelenideElement getCreatedReference(String tableName) {
-        for (SelenideElement element : getReferenceList()){
-            if (element.getText().contains(tableName)) {
-                return element;
-            }
-        }
-        throw new RuntimeException("Reference with name " + tableName + " cannot be found in list of references ");
+        return $(".content-row:has(span:contains(" + tableName + "))");
     }
 
     private List<SelenideElement> getReferenceList() {

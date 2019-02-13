@@ -49,7 +49,7 @@ public class CreateNewConnectionDialog extends AbstractPage {
     public void saveConnection() {
         getSaveButton().click();
         getSuccessElement().shouldBe(visible);
-        getCloseDialogButton().click();
+        //getCloseDialogButton().click();
     }
 
     private SelenideElement getSuccessElement() {
