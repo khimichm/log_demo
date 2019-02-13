@@ -74,4 +74,14 @@ public class TestDefaultFlow extends AbstractTest {
         CreateNewUserDialog dialog = platformSettingsPage.getCreateNewUserButton();
         dialog.createNewUser();
     }
+
+    @Test(groups = {"ui","Enrichments"})
+    public void createNewEnrichment(){
+        LoginPage loginPage = new LoginPage();
+        loginPage.goToLoginPage();
+        StartPage startPage = loginPage.login(LogiUsers.ADMIN);
+        DataAuthoringPage dataAuthoringPage = startPage.goToDataAuthoring();
+        EnrichmentsPage enrichmentsPage = dataAuthoringPage.viewAllEnrichments();
+        enrichmentsPage.createNewEnrichment("qasql2k8", "Orders", "mssql orders enrichment");
+    }
 }
