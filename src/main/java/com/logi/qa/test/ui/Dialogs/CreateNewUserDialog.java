@@ -5,10 +5,7 @@ import com.logi.qa.test.ui.Pages.AbstractPage;
 import com.logi.qa.test.ui.Pages.PlatformSettingsPage;
 import org.openqa.selenium.By;
 
-import java.util.List;
-
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 public class CreateNewUserDialog extends AbstractPage {
 
@@ -25,7 +22,7 @@ public class CreateNewUserDialog extends AbstractPage {
     private final String password = context.getProperty("newuser.password");
 
 
-    public PlatformSettingsPage createNewUser(){
+    public PlatformSettingsPage createNewUser() {
         getUserNameInput().setValue(userName);
         getUserFirstNameInput().setValue(firstName);
         getUserLastNameInput().setValue(lastValue);
@@ -35,11 +32,27 @@ public class CreateNewUserDialog extends AbstractPage {
         return new PlatformSettingsPage();
     }
 
-    private SelenideElement getSaveButton(){return $(NEW_USER_SAVE);}
+    private SelenideElement getSaveButton() {
+        return $(NEW_USER_SAVE);
+    }
 
-    private SelenideElement getUserNameInput(){return $(By.name(NEW_USER_USER_NAME));}
-    private SelenideElement getUserFirstNameInput(){return $(By.name(NEW_USER_FIRST_NAME));}
-    private SelenideElement getUserLastNameInput(){return $(By.name(NEW_USER_LAST_NAME));}
-    private SelenideElement getUserEmailInput(){return $(By.name(NEW_USER_EMAIL));}
-    private SelenideElement getUserPasswordInput(){return $(NEW_USER_PASSWORD);}
+    private SelenideElement getUserNameInput() {
+        return $(By.name(NEW_USER_USER_NAME));
+    }
+
+    private SelenideElement getUserFirstNameInput() {
+        return $(By.name(NEW_USER_FIRST_NAME));
+    }
+
+    private SelenideElement getUserLastNameInput() {
+        return $(By.name(NEW_USER_LAST_NAME));
+    }
+
+    private SelenideElement getUserEmailInput() {
+        return $(By.name(NEW_USER_EMAIL));
+    }
+
+    private SelenideElement getUserPasswordInput() {
+        return $(NEW_USER_PASSWORD);
+    }
 }

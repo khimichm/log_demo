@@ -12,22 +12,24 @@ public class PlatformSettingsPage extends PageWithPanels {
     private static final String CREATE_NEW_USER_BUTTON = "CREATE A NEW USER";
     private static final String USER_TYPE_RADIO_BUTTON = "usersType";
 
-    public void selectAuthoringUsers(){
+    public void selectAuthoringUsers() {
         userTypeRadioButton().selectRadio("authoring");
     }
 
-    public void selectTAUsers(){
+    public void selectTAUsers() {
         userTypeRadioButton().selectRadio("trustedAccess");
     }
 
-    public CreateNewUserDialog getCreateNewUserButton(){
+    public CreateNewUserDialog getCreateNewUserButton() {
         createNewUserButton().click();
         return new CreateNewUserDialog();
     }
 
-    private SelenideElement createNewUserButton(){
+    private SelenideElement createNewUserButton() {
         return $(byText(CREATE_NEW_USER_BUTTON));
     }
 
-    public SelenideElement userTypeRadioButton(){return $(By.name(USER_TYPE_RADIO_BUTTON));}
+    public SelenideElement userTypeRadioButton() {
+        return $(By.name(USER_TYPE_RADIO_BUTTON));
+    }
 }

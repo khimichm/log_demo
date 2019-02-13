@@ -42,6 +42,29 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-allure-environment</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/allure-results</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/test/resources</directory>
+                                    <includes>
+                                        <include>environment.properties</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -95,12 +118,6 @@
             <version>2.9.0</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-chrome-driver</artifactId>-->
-            <!--<version>3.141.59</version>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -118,24 +135,6 @@
             <artifactId>guava</artifactId>
             <version>25.0-jre</version>
         </dependency>
-    <!--<dependency>-->
-        <!--<groupId>org.junit.vintage</groupId>-->
-        <!--<artifactId>junit-vintage-engine</artifactId>-->
-        <!--<version>5.1.0</version>-->
-        <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-        <!--<groupId>org.junit.platform</groupId>-->
-        <!--<artifactId>junit-platform-launcher</artifactId>-->
-        <!--<version>1.1.0</version>-->
-        <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-        <!--<groupId>org.junit.platform</groupId>-->
-        <!--<artifactId>junit-platform-runner</artifactId>-->
-        <!--<version>1.1.0</version>-->
-        <!--<scope>test</scope>-->
-    <!--</dependency>-->
     </dependencies>
 
 </project>

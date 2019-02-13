@@ -6,8 +6,4 @@ public abstract class BaseApi {
 
     public PropertiesContext context = PropertiesContext.getInstance();
 
-    public String getBaseURI(){
-        return context.getProperty("api.url");
-    }
-
 }

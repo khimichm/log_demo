@@ -1,11 +1,9 @@
 package com.logi.qa.test.ui.Pages;
 
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.ex.ElementNotFound;
 import com.logi.qa.test.ui.Dialogs.CreateNewConnectionDialog;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 /**
  * @author mkhimich

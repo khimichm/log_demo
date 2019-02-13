@@ -7,8 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SystemConnection extends BaseApi{
 
@@ -45,7 +43,7 @@ public class SystemConnection extends BaseApi{
     }
 
     private String getJsonFromFile(String name) throws IOException {
-        File json = new File(Paths.get(context.USER_DIR, context.getProperty("json.location.path"), name).toString());
+        File json = new File(Paths.get(PropertiesContext.USER_DIR, context.getProperty("json.location.path"), name).toString());
         return FileUtils.readFileToString(json, "UTF-8");
     }
 }

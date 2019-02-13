@@ -11,8 +11,8 @@ import java.util.Map;
 public enum LogiUsers {
     //    private static final PropertiesContext context = PropertiesContext.getInstance();
     ADMIN(
-        PropertiesContext.getInstance().getProperty("admin.user.name"),
-        PropertiesContext.getInstance().getProperty("admin.user.password")
+            PropertiesContext.getInstance().getProperty("admin.user.name"),
+            PropertiesContext.getInstance().getProperty("admin.user.password")
     );
     private String userName;
     private String password;

@@ -28,13 +28,17 @@ public class DataAuthoringPage extends PageWithPanels {
     }
 
 
-    public EnrichmentsPage viewAllEnrichments(){
+    public EnrichmentsPage viewAllEnrichments() {
         getViewAllEnrichments().click();
         return new EnrichmentsPage();
     }
+
     private SelenideElement getReferencesLink() {
         return $(DATAAUTHORING_CREATE_NEW_REFERENCE);
     }
-    private SelenideElement getViewAllEnrichments() {return $(DATAAUTHORING_VIEW_ALL_ENRICHMENTS);}
+
+    private SelenideElement getViewAllEnrichments() {
+        return $(DATAAUTHORING_VIEW_ALL_ENRICHMENTS);
+    }
 
 }

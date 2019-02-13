@@ -6,12 +6,14 @@ import com.logi.qa.test.ui.Util.PropertiesContext;
 /**
  * Class setups OS and Browser environment
  * <p>
+ *
  * @author mkhimich
  */
 public class EnvironmentUtil {
     private static final String OS_NAME_KEY = "os.name";
 
     private static final String RUN_BROWSER_DRIVER = "browser.driver";
+    private static final String BROWSER_NAME = "browser.name";
 
     private Browser browser;
     private OS os;
@@ -55,9 +57,9 @@ public class EnvironmentUtil {
      */
     private Browser initBrowser() {
         Browser type;
-        int browserIntValue = Integer.valueOf(PropertiesContext.getInstance().getProperty(RUN_BROWSER_DRIVER));
-        System.out.println("Got browser ID " + browserIntValue);
-        type = getBrowserByIntKey(browserIntValue);
+        String browserName = PropertiesContext.getInstance().getProperty(BROWSER_NAME);
+        System.out.println("Got browser name " + browserName);
+        type = getBrowserByName(browserName);
         System.out.println("Browser type is set to " + type.name());
         return type;
     }
@@ -83,12 +85,30 @@ public class EnvironmentUtil {
             case 4:
                 type = Browser.IE;
                 break;
-            case 5:
-                type = Browser.SAUCE;
-                System.out.println("saucelabs.com");
+            default:
+                type = Browser.CHROME;
+        }
+
+        return type;
+    }
+
+    private Browser getBrowserByName(String name) {
+        Browser type;
+        switch (name) {
+            case "FIREFOX":
+                type = Browser.FIREFOX;
+                break;
+            case "EDGE":
+                type = Browser.EDGE;
+                break;
+            case "CHROME":
+                type = Browser.CHROME;
+                break;
+            case "IE":
+                type = Browser.IE;
                 break;
             default:
-                type = Browser.FIREFOX;
+                type = Browser.CHROME;
         }
 
         return type;

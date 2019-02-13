@@ -18,6 +18,7 @@ import java.nio.file.Paths;
 public class WebDriverWrapper {
 
     private static final PropertiesContext context = PropertiesContext.getInstance();
+
     /**
      * Method get the browser instance and try to create WebDriver object for test
      *
@@ -31,7 +32,6 @@ public class WebDriverWrapper {
      * Method helps create new WebDriver object for test accordingly to browser
      *
      * @param browser Browser
-     *
      * @return driver WebDriver
      */
     private static SelenideDriver getWebDriver(Browser browser) {

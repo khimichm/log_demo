@@ -14,8 +14,8 @@ public class CreateNewReferencePage extends PageWithPanels {
     private static final String REFERENCE_CREATE_FROM_TABLE = "#table-dataview-radio";
     private static final String REFERENCE_SELECT_TABLE_LIST_INPUT = "#input-search-columns";
     private static final String REFERENCE_SELECT_TABLE_LIST = ".connection-table-list .connection-table-item";
-    private static final String REFERENCE_PREVIEW_TABLE= ".table-preview";
-    private static final String REFERENCE_CREATE_NEW_REFERENCE= ".create-new-reference-btn";
+    private static final String REFERENCE_PREVIEW_TABLE = ".table-preview";
+    private static final String REFERENCE_CREATE_NEW_REFERENCE = ".create-new-reference-btn";
 
     public void selectDB(String dbName) {
         getConnectionDropDown().selectOption(dbName);

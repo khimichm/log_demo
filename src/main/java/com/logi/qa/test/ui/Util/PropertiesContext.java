@@ -1,7 +1,6 @@
 package com.logi.qa.test.ui.Util;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelectorMode;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.openqa.selenium.support.ui.Select;
@@ -17,6 +16,7 @@ import static com.codeborne.selenide.SelectorMode.Sizzle;
  * Testing context that is shared by all tests. Contains all data needed for
  * testing. Responsible for obtaining this data at startup.
  * <p>
+ *
  * @author mkhimch
  */
 public class PropertiesContext {
@@ -25,9 +25,11 @@ public class PropertiesContext {
     public static final String PROPERTIES_SUFFIX = ".properties";
     private static final String TEST_PROPERTIES = "test";
     private static final String UI_MAP_PROPERTIES = "uiMap";
+    private static final String ENVIRONMENT_PROPERTIES = "environment";
 
     private Properties testMap = new Properties();
     private Properties uiMap = new Properties();
+    private Properties environmentMap = new Properties();
     private Properties generalMap = new Properties();
 
     private static PropertiesContext instance = new PropertiesContext();
@@ -58,12 +60,14 @@ public class PropertiesContext {
 
             loadProperties(testMap, TEST_PROPERTIES);
             loadProperties(uiMap, UI_MAP_PROPERTIES);
+            loadProperties(environmentMap, ENVIRONMENT_PROPERTIES);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
         generalMap.putAll(testMap);
         generalMap.putAll(uiMap);
+        generalMap.putAll(environmentMap);
     }
 
     private void loadProperties(Properties props, String fileName) throws IOException {

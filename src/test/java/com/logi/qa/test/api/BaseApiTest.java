@@ -2,17 +2,11 @@ package com.logi.qa.test.api;
 
 
 import com.logi.qa.test.ui.LogiUsers;
-import com.logi.qa.test.ui.Util.PropertiesContext;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Step;
-import io.qameta.allure.restassured.AllureRestAssured;
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.containsString;

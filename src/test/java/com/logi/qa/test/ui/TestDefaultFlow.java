@@ -8,13 +8,12 @@ import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.*;
 
-
 /**
  * @author mkhimich
  */
 public class TestDefaultFlow extends AbstractTest {
 
-    @Test(groups = {"ui","login"})
+    @Test(groups = {"ui", "login"})
     public void testLoginPage() {
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
@@ -22,7 +21,7 @@ public class TestDefaultFlow extends AbstractTest {
         startPage.getLogiContent().shouldBe(visible);
     }
 
-    @Test(groups = {"ui","connection"})
+    @Test(groups = {"ui", "connection"})
     public void testCreateConnection() {
         String sourceName = "test" + getRandomString();
         LoginPage loginPage = new LoginPage();
@@ -35,7 +34,7 @@ public class TestDefaultFlow extends AbstractTest {
         connectionsPage.deleteConnector(sourceName);
     }
 
-    @Test(groups = {"ui","flow"})
+    @Test(groups = {"ui", "flow"})
     public void testFullFlow() {
         String sourceName = "test " + getRandomString();
         String enrichmentName = "enrichment" + getRandomString();
@@ -68,8 +67,8 @@ public class TestDefaultFlow extends AbstractTest {
         connectionsPage.deleteConnector(sourceName);
     }
 
-    @Test(groups = {"ui","platform"})
-    public void testPlatformSettings(){
+    @Test(groups = {"ui", "platform"})
+    public void testPlatformSettings() {
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(LogiUsers.ADMIN);
@@ -78,8 +77,8 @@ public class TestDefaultFlow extends AbstractTest {
         platformSettingsPage.getCreateNewUserButton();
     }
 
-    @Test(groups = {"ui","platform"})
-    public void testCreateNewUser(){
+    @Test(groups = {"ui", "platform"})
+    public void testCreateNewUser() {
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(LogiUsers.ADMIN);
@@ -88,8 +87,8 @@ public class TestDefaultFlow extends AbstractTest {
         dialog.createNewUser();
     }
 
-    @Test(groups = {"ui","enrichments"})
-    public void testCreateNewEnrichment(){
+    @Test(groups = {"ui", "enrichments"})
+    public void testCreateNewEnrichment() {
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(LogiUsers.ADMIN);

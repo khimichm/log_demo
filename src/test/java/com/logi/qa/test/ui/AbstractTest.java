@@ -10,7 +10,6 @@ import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
 
-
 /**
  * @author mkhimich
  */
@@ -26,7 +25,7 @@ public abstract class AbstractTest {
     @BeforeMethod
     public void tearUp(Method method) {
         System.out.println("========================== START TEST " + method.getName() + " " +
-            "==============================");
+                "==============================");
         System.out.println("Server URL = " + context.getProperty("app.url"));
         driver = WebDriverWrapper.getWebDriver();
     }
@@ -34,7 +33,7 @@ public abstract class AbstractTest {
     @AfterMethod
     public void tearDown(Method method) {
         System.out.println("========================== END TEST " + method.getName() + " " +
-            "==============================");
+                "==============================");
         driver.getWebDriver().quit();
     }
 

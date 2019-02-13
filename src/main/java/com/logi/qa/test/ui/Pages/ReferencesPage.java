@@ -1,13 +1,10 @@
 package com.logi.qa.test.ui.Pages;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.$x;
 
 public class ReferencesPage extends PageWithPanels {
     private static final String CREATE_NEW_REFERENCE = "a[href='/composer/data-manager/references/new-reference']";

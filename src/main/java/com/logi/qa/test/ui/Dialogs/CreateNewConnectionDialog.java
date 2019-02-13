@@ -3,7 +3,6 @@ package com.logi.qa.test.ui.Dialogs;
 import com.codeborne.selenide.SelenideElement;
 import com.logi.qa.test.ui.Pages.AbstractPage;
 
-import javax.swing.*;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -90,8 +89,12 @@ public class CreateNewConnectionDialog extends AbstractPage {
         return $(CONNECTIONDIALOG_TEST_SOURCE);
     }
 
-    public SelenideElement expandAdvancedOptions(){return $(EXPAND_ADVANCED_OPTIONS);}
+    public SelenideElement expandAdvancedOptions() {
+        return $(EXPAND_ADVANCED_OPTIONS);
+    }
 
-    public SelenideElement collapceAdvancedOptions(){return $(COLLAPSE_ADVANCED_OPTIONS);}
+    public SelenideElement collapceAdvancedOptions() {
+        return $(COLLAPSE_ADVANCED_OPTIONS);
+    }
 
 }
